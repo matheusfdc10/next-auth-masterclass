@@ -10,6 +10,7 @@ import { currentUser } from "@/lib/auth";
 import { getUserByEmail, getUserById } from "@/data/user";
 import { generateVerificationToken } from "@/lib/tokens";
 import { sedVerificationEmail } from "@/lib/email";
+import { User } from "@prisma/client";
 
 
 export const settings = async (
@@ -74,7 +75,7 @@ export const settings = async (
     //     return { error: "Invalid fields"}
     // }
 
-    const updatedUser = await db.user.update({
+    const updatedUser: User = await db.user.update({
         where: { 
             id: dbUser.id
         },
@@ -85,10 +86,11 @@ export const settings = async (
 
     await unstable_update({
         user: {
-            name: updatedUser.name,
-            email: updatedUser.email,
-            role: updatedUser.role,
-            isTwoFactorEnabled: updatedUser.isTwoFactorEnabled,
+            ...updatedUser,
+            // name: updatedUser.name,
+            // email: updatedUser.email,
+            // role: updatedUser.role,
+            // isTwoFactorEnabled: updatedUser.isTwoFactorEnabled,
         }
     })
 

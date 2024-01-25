@@ -20,11 +20,11 @@ import { Switch } from "@/components/ui/switch";
 
 
 const SettingsPage = () => {
-    const user = useCurrentUser()
-    const [error, setError] = useState<string | undefined>()
-    const [success, setSuccess] = useState<string | undefined>()
-    const { update } = useSession()
-    const [isPedding, startTransition] = useTransition()
+    const user = useCurrentUser();
+    const [error, setError] = useState<string | undefined>();
+    const [success, setSuccess] = useState<string | undefined>();
+    const { update } = useSession();
+    const [isPedding, startTransition] = useTransition();
 
     const form = useForm<z.infer<typeof SettingsSchema>>({
         resolver: zodResolver(SettingsSchema),
