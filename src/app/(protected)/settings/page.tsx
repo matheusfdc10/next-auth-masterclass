@@ -101,7 +101,7 @@ const SettingsPage = () => {
                                                         {...field}
                                                         placeholder="john.doe@exemple.com"
                                                         type="email"
-                                                        disabled={isPedding}
+                                                        disabled
                                                     />
                                                 </FormControl>
                                                 <FormMessage />

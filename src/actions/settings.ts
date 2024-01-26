@@ -35,23 +35,23 @@ export const settings = async (
         values.isTwoFactorEnabled = undefined;
     }
 
-    if (values.email && values.email !== user.email) {
-        const existingUser = await getUserByEmail(values.email)
+    // if (values.email && values.email !== user.email) {
+    //     const existingUser = await getUserByEmail(values.email)
 
-        if (existingUser && existingUser.id !== user.id) {
-            return { error: "Email already in user!" }
-        }
+    //     if (existingUser && existingUser.id !== user.id) {
+    //         return { error: "Email already in user!" }
+    //     }
 
-        const verificationToken = await generateVerificationToken(
-            values.email
-        )
-        await sedVerificationEmail(
-            verificationToken.email,
-            verificationToken.token
-        )
+    //     const verificationToken = await generateVerificationToken(
+    //         values.email
+    //     )
+    //     await sedVerificationEmail(
+    //         verificationToken.email,
+    //         verificationToken.token
+    //     )
 
-        return { success: "Verification email sent!"}
-    }
+    //     // return { success: "Verification email sent!"}
+    // }
 
     if (values.password && values.newPassword && dbUser.password) {
         const passwordMatch = await bcrypt.compare(
@@ -75,6 +75,7 @@ export const settings = async (
     //     return { error: "Invalid fields"}
     // }
 
+    values.email = undefined;
     const updatedUser: User = await db.user.update({
         where: { 
             id: dbUser.id
